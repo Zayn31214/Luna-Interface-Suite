@@ -1,30 +1,6 @@
---[[
+local Release = "Prerelease Beta 6.1"
 
-Luna Interface Suite
-by Nebula Softworks
-
-Main Credits
-
-Hunter (Nebula Softworks) | Designing And Programming | Main Developer
-JustHey (Nebula Softworks) | Configurations, Bug Fixing And More! | Co Developer
-Throit | Color Picker
-Wally | Dragging And Certain Functions
-Sirius | PCall Parsing, Notifications, Slider And Home Tab
-Luna Executor | Original UI
-
-
-Extra Credits / Provided Certain Elements
-
-Inori | Configuration Concept
-Latte Softworks and qweery | Lucide Icons And Material Icons
-kirill9655 | Loading Circle
-Deity/dp4pv/x64x70 | Certain Scripting and Testing ig
-
-]]
-
-local Release = "Prerelease Beta 6"
-
-local Luna = { Folder = "Luna", Options = {}, ThemeGradient = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(117, 164, 206)), ColorSequenceKeypoint.new(0.50, Color3.fromRGB(123, 201, 201)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(224, 138, 175))} }
+local Luna = { Folder = "Luna", Options = {}, ThemeGradient = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(30, 30, 30)), ColorSequenceKeypoint.new(0.50, Color3.fromRGB(120, 50, 150)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(50, 50, 50))} }
 
 local UserInputService = game:GetService("UserInputService")
 local TweenService = game:GetService("TweenService")
@@ -1537,16 +1513,16 @@ local IconModule = {
 local request = (syn and syn.request) or (http and http.request) or http_request or nil
 local tweeninfo = TweenInfo.new(0.3, Enum.EasingStyle.Exponential, Enum.EasingDirection.Out)
 local PresetGradients = {
-	["Nightlight (Classic)"] = {Color3.fromRGB(147, 255, 239), Color3.fromRGB(201,211,233), Color3.fromRGB(255, 167, 227)},
-	["Nightlight (Neo)"] = {Color3.fromRGB(117, 164, 206), Color3.fromRGB(123, 201, 201), Color3.fromRGB(224, 138, 175)},
-	Starlight = {Color3.fromRGB(147, 255, 239), Color3.fromRGB(181, 206, 241), Color3.fromRGB(214, 158, 243)},
-	Solar = {Color3.fromRGB(242, 157, 76), Color3.fromRGB(240, 179, 81), Color3.fromRGB(238, 201, 86)},
-	Sparkle = {Color3.fromRGB(199, 130, 242), Color3.fromRGB(221, 130, 238), Color3.fromRGB(243, 129, 233)},
-	Lime = {Color3.fromRGB(170, 255, 127), Color3.fromRGB(163, 220, 138), Color3.fromRGB(155, 185, 149)},
-	Vine = {Color3.fromRGB(0, 191, 143), Color3.fromRGB(0, 126, 94), Color3.fromRGB(0, 61, 46)},
-	Cherry = {Color3.fromRGB(148, 54, 54), Color3.fromRGB(168, 67, 70), Color3.fromRGB(188, 80, 86)},
-	Daylight = {Color3.fromRGB(51, 156, 255), Color3.fromRGB(89, 171, 237), Color3.fromRGB(127, 186, 218)},
-	Blossom = {Color3.fromRGB(255, 165, 243), Color3.fromRGB(213, 129, 231), Color3.fromRGB(170, 92, 218)},
+	["Nightlight (Classic)"] = {Color3.fromRGB(30, 30, 30), Color3.fromRGB(120, 50, 150), Color3.fromRGB(50, 50, 50)},
+	["Nightlight (Neo)"] = {Color3.fromRGB(30, 30, 30), Color3.fromRGB(120, 50, 150), Color3.fromRGB(50, 50, 50)},
+	Starlight = {Color3.fromRGB(30, 30, 30), Color3.fromRGB(120, 50, 150), Color3.fromRGB(50, 50, 50)},
+	Solar = {Color3.fromRGB(30, 30, 30), Color3.fromRGB(120, 50, 150), Color3.fromRGB(50, 50, 50)},
+	Sparkle = {Color3.fromRGB(30, 30, 30), Color3.fromRGB(120, 50, 150), Color3.fromRGB(50, 50, 50)},
+	Lime = {Color3.fromRGB(30, 30, 30), Color3.fromRGB(120, 50, 150), Color3.fromRGB(50, 50, 50)},
+	Vine = {Color3.fromRGB(30, 30, 30), Color3.fromRGB(120, 50, 150), Color3.fromRGB(50, 50, 50)},
+	Cherry = {Color3.fromRGB(30, 30, 30), Color3.fromRGB(120, 50, 150), Color3.fromRGB(50, 50, 50)},
+	Daylight = {Color3.fromRGB(30, 30, 30), Color3.fromRGB(120, 50, 150), Color3.fromRGB(50, 50, 50)},
+	Blossom = {Color3.fromRGB(30, 30, 30), Color3.fromRGB(120, 50, 150), Color3.fromRGB(50, 50, 50)},
 }
 
 local function GetIcon(icon, source)
@@ -1873,6 +1849,7 @@ local function Hide(Window, bind, notif)
 
 	task.wait(0.28)
 	Window.Size = UDim2.new(0,0,0,0)
+	Window.Parent.ShadowHolder.Visible = false
 	task.wait()
 	Window.Elements.Parent.Visible = false
 	Window.Visible = false
@@ -2092,7 +2069,6 @@ function Luna:Notification(data) -- action e.g open messages
 		newNotification.Parent = Notifications
 		newNotification.LayoutOrder = #Notifications:GetChildren()
 		newNotification.Visible = false
-		BlurModule(newNotification)
 
 		-- Set Data
 		newNotification.Title.Text = data.Title
@@ -2183,10 +2159,10 @@ local function Unhide(Window, currentTab)
 		if tabbtn.ClassName == "Frame" and tabbtn.Name ~= "InActive Template" then
 			if tabbtn.Name == currentTab then
 				TweenService:Create(tabbtn, TweenInfo.new(0.3, Enum.EasingStyle.Exponential), {BackgroundTransparency = 0}):Play()
+				TweenService:Create(tabbtn.UIStroke, TweenInfo.new(0.3, Enum.EasingStyle.Exponential), {Transparency = 0.41}):Play()
 			end
 			TweenService:Create(tabbtn.ImageLabel, TweenInfo.new(0.3, Enum.EasingStyle.Exponential), {ImageTransparency = 0}):Play()
 			TweenService:Create(tabbtn.DropShadowHolder.DropShadow, TweenInfo.new(0.3, Enum.EasingStyle.Exponential), {ImageTransparency = 1}):Play()
-			TweenService:Create(tabbtn.UIStroke, TweenInfo.new(0.3, Enum.EasingStyle.Exponential), {Transparency = 0.5}):Play()
 		end
 	end
 
@@ -2244,8 +2220,15 @@ function Luna:CreateWindow(WindowSettings)
 		Note = "No Instructions",
 		SaveInRoot = false, -- Enabling will save the key in your RootFolder (YOU MUST HAVE ONE BEFORE ENABLING THIS OPTION)
 		SaveKey = true, -- The user's key will be saved, but if you change the key, they will be unable to use your script
-		Key = {""} -- List of keys that will be accepted by the system, please use a system like Pelican or Luarmor that provide key strings based on your HWID since putting a simple string is very easy to bypass
+		Key = {""}, -- List of keys that will be accepted by the system, please use a system like Pelican or Luarmor that provide key strings based on your HWID since putting a simple string is very easy to bypass
+		SecondAction = {}	
 	}, WindowSettings.KeySettings or {})
+
+	WindowSettings.KeySettings.SecondAction = Kwargify({
+		Enabled = false,
+		Type = "Discord", -- Link/Discord
+		Parameter = "" -- for discord, add the invite link like home tab. for link, type the link of ur key sys
+	}, WindowSettings.KeySettings.SecondAction)
 
 	local Passthrough = false
 
@@ -2269,7 +2252,6 @@ function Luna:CreateWindow(WindowSettings)
 
 	LoadingFrame.Frame.Frame.Title.Text = WindowSettings.LoadingTitle
 	LoadingFrame.Frame.Frame.Subtitle.Text = WindowSettings.LoadingSubtitle
-	LoadingFrame.Version.Text = LoadingFrame.Frame.Frame.Title.Text == "Luna Interface Suite" and Release or "Luna UI"
 
 	Navigation.Player.icon.ImageLabel.Image = Players:GetUserThumbnailAsync(Players.LocalPlayer.UserId, Enum.ThumbnailType.HeadShot, Enum.ThumbnailSize.Size48x48)
 	Navigation.Player.Namez.Text = Players.LocalPlayer.DisplayName
@@ -2278,7 +2260,7 @@ function Luna:CreateWindow(WindowSettings)
 	for i,v in pairs(Main.Controls:GetChildren()) do
 		v.Visible = false
 	end
-	
+
 	Main:GetPropertyChangedSignal("Position"):Connect(function()
 		Main.Parent.ShadowHolder.Position = Main.Position
 	end)
@@ -2310,22 +2292,25 @@ function Luna:CreateWindow(WindowSettings)
 
 	LunaUI.Enabled = true
 
-	BlurModule(Main)
 
 	if WindowSettings.KeySystem then
+		local KeySettings = WindowSettings.KeySettings
+		
 		Draggable(Dragger, Main)
 		Draggable(LunaUI.MobileSupport, LunaUI.MobileSupport)
 		if dragBar then Draggable(dragInteract, Main, true, 255) end
-		
+
 		if not WindowSettings.KeySettings then
 			Passthrough = true
 			return
 		end
+		
+		WindowSettings.KeySettings.FileName = "key"
 
 		if typeof(WindowSettings.KeySettings.Key) == "string" then WindowSettings.KeySettings.Key = {WindowSettings.KeySettings.Key} end
-		
+
 		local direc = WindowSettings.KeySettings.SaveInRoot and "Luna/Configurations/" .. WindowSettings.ConfigSettings.RootFolder .. "/" .. WindowSettings.ConfigSettings.ConfigFolder .. "/Key System/" or "Luna/Configurations/" ..  WindowSettings.ConfigSettings.ConfigFolder .. "/Key System/"
-		
+
 		if isfile and isfile(direc .. WindowSettings.KeySettings.FileName .. ".luna") then
 			for i, Key in ipairs(WindowSettings.KeySettings.Key) do
 				if string.find(readfile(direc .. WindowSettings.KeySettings.FileName .. ".luna"), Key) then
@@ -2334,17 +2319,51 @@ function Luna:CreateWindow(WindowSettings)
 				end
 			end
 		end
-		
+
 		if not Passthrough then
 
-			local AttemptsRemaining = math.random(2, 5)
+			local Btn = KeySystem.Action.Copy
+			local typesys = KeySettings.SecondAction.Type
 			
+			if typesys == "Discord" then
+				Btn = KeySystem.Action.Discord
+			end
+
+			local AttemptsRemaining = math.random(2, 5)
+
 			KeySystem.Visible = true
 			KeySystem.Title.Text = WindowSettings.KeySettings.Title
 			KeySystem.Subtitle.Text = WindowSettings.KeySettings.Subtitle
 			KeySystem.textshit.Text = WindowSettings.KeySettings.Note
+
+			if KeySettings.SecondAction.Enabled == true then
+				Btn.Visible = true
+			end
 			
-			KeySystem.Action.Interact.MouseButton1Click:Connect(function()
+			Btn.Interact.MouseButton1Click:Connect(function()
+				if typesys == "Discord" then
+					setclipboard(tostring("https://discord.gg/"..KeySettings.SecondAction.Parameter)) -- Hunter if you see this I added copy also was too lazy to send u msg
+					if request then
+						request({
+							Url = 'http://127.0.0.1:6463/rpc?v=1',
+							Method = 'POST',
+							Headers = {
+								['Content-Type'] = 'application/json',
+								Origin = 'https://discord.com'
+							},
+							Body = HttpService:JSONEncode({
+								cmd = 'INVITE_BROWSER',
+								nonce = HttpService:GenerateGUID(false),
+								args = {code = KeySettings.SecondAction.Parameter}
+							})
+						})
+					end
+				else
+					setclipboard(tostring(KeySettings.SecondAction.Parameter))
+				end
+			end)
+
+			KeySystem.Action.Submit.Interact.MouseButton1Click:Connect(function()
 				if #KeySystem.Input.InputBox.Text == 0 then return end
 				local KeyFound = false
 				local FoundKey = ''
@@ -2376,7 +2395,7 @@ function Luna:CreateWindow(WindowSettings)
 					task.wait(0.51)
 					Passthrough = true
 					KeySystem.Visible = false
-					if Window.KeySettings.SaveKey then
+					if WindowSettings.KeySettings.SaveKey then
 						if writefile then
 							writefile(direc .. WindowSettings.KeySettings.FileName .. ".luna", FoundKey)
 						end
@@ -2384,7 +2403,7 @@ function Luna:CreateWindow(WindowSettings)
 					end
 				else
 					if AttemptsRemaining == 0 then
-						
+
 						game.Players.LocalPlayer:Kick("No Attempts Remaining")
 						game:Shutdown()
 					end
@@ -2394,32 +2413,14 @@ function Luna:CreateWindow(WindowSettings)
 					KeySystem.Input.InputBox.Text = ""
 				end
 			end)
-			
+
 			KeySystem.Close.MouseButton1Click:Connect(function()
-				for _, instance in pairs(KeySystem:GetDescendants()) do
-					if instance.ClassName ~= "UICorner" and instance.ClassName ~= "UIPadding" then
-						if instance.ClassName ~= "UIStroke" then
-							tween(instance, {BackgroundTransparency = 1}, nil,TweenInfo.new(0.6, Enum.EasingStyle.Exponential))
-						end
-						if instance.ClassName == "ImageButton" then
-							tween(instance, {ImageTransparency = 1}, nil,TweenInfo.new(0.5, Enum.EasingStyle.Exponential))
-						end
-						if instance.ClassName == "TextLabel" then
-							tween(instance, {TextTransparency = 1}, nil,TweenInfo.new(0.4, Enum.EasingStyle.Exponential))
-						end
-						if instance.ClassName == "UIStroke" then
-							tween(instance, {Transparency = 1}, nil,TweenInfo.new(0.5, Enum.EasingStyle.Exponential))
-						end
-					end
-				end
-				Hide(Main, Window.Bind, false)
 				
-				task.wait(3)
 				Luna:Destroy()
 			end)
 		end
 	end
-	
+
 	if WindowSettings.KeySystem then
 		repeat task.wait() until Passthrough
 	end
@@ -2444,7 +2445,7 @@ function Luna:CreateWindow(WindowSettings)
 		wait(0.3)
 		TweenService:Create(LoadingFrame, TweenInfo.new(0.5, Enum.EasingStyle.Exponential, Enum.EasingDirection.Out), {BackgroundTransparency = 1}):Play()
 	end
-	
+
 	TweenService:Create(Main, TweenInfo.new(0.5, Enum.EasingStyle.Exponential, Enum.EasingDirection.Out), {BackgroundTransparency = 0.2, Size = MainSize}):Play()
 	TweenService:Create(Main.Parent.ShadowHolder, TweenInfo.new(0.5, Enum.EasingStyle.Exponential, Enum.EasingDirection.Out), {Size = MainSize}):Play()
 	TweenService:Create(Main.Title.Title, TweenInfo.new(0.35, Enum.EasingStyle.Exponential, Enum.EasingDirection.Out), {TextTransparency = 0}):Play()
@@ -3557,11 +3558,11 @@ function Luna:CreateWindow(WindowSettings)
 
 			end
 
-			-- Dynamic Input
 			function Section:CreateInput(InputSettings, Flag)
-				TabPage.Position = UDim2.new(0,0,0,28)
+				TabPage.Position = UDim2.new(0, 0, 0, 28)
 				local InputV = { IgnoreConfig = false, Class = "Input", Settings = InputSettings }
-
+			
+				-- Default settings
 				InputSettings = Kwargify({
 					Name = "Dynamic Input",
 					Description = nil,
@@ -3571,159 +3572,151 @@ function Luna:CreateWindow(WindowSettings)
 					Numeric = false,
 					Enter = false,
 					MaxCharacters = nil,
-					Callback = function(Text)
-
-					end, -- 52
+					Callback = function(Text) end,
 				}, InputSettings or {})
-
+			
 				InputV.CurrentValue = InputSettings.CurrentValue
-
-				local descriptionbool
-				if InputSettings.Description ~= nil and InputSettings.Description ~= "" then
-					descriptionbool = true
-				end
-
-				local Input 
-				if descriptionbool then
-					Input = Elements.Template.InputDesc:Clone()
-				else
-					Input = Elements.Template.Input:Clone()
-				end
-
+			
+				local descriptionbool = InputSettings.Description and InputSettings.Description ~= ""
+				local Input = descriptionbool and Elements.Template.InputDesc:Clone() or Elements.Template.Input:Clone()
+			
 				Input.Name = InputSettings.Name
 				Input.Title.Text = InputSettings.Name
 				if descriptionbool then Input.Desc.Text = InputSettings.Description end
 				Input.Visible = true
 				Input.Parent = TabPage
-
-				Input.BackgroundTransparency = 1
-				Input.UIStroke.Transparency = 1
-				Input.Title.TextTransparency = 1
-				if descriptionbool then Input.Desc.TextTransparency = 1 end
-				Input.InputFrame.BackgroundTransparency = 1
-				Input.InputFrame.UIStroke.Transparency = 1
-				Input.InputFrame.InputBox.TextTransparency = 1
-
-				TweenService:Create(Input, TweenInfo.new(0.3, Enum.EasingStyle.Exponential), {BackgroundTransparency = 0.5}):Play()
-				TweenService:Create(Input.UIStroke, TweenInfo.new(0.3, Enum.EasingStyle.Exponential), {Transparency = 0.5}):Play()
-				TweenService:Create(Input.Title, TweenInfo.new(0.3, Enum.EasingStyle.Exponential), {TextTransparency = 0}):Play()	
-				if descriptionbool then TweenService:Create(Input.Desc, TweenInfo.new(0.3, Enum.EasingStyle.Exponential), {TextTransparency = 0}):Play() end
-				TweenService:Create(Input.InputFrame, TweenInfo.new(0.3, Enum.EasingStyle.Exponential), {BackgroundTransparency = 0.9}):Play()
-				TweenService:Create(Input.InputFrame.UIStroke, TweenInfo.new(0.3, Enum.EasingStyle.Exponential), {Transparency = 0.3}):Play()
-				TweenService:Create(Input.InputFrame.InputBox, TweenInfo.new(0.3, Enum.EasingStyle.Exponential), {TextTransparency = 0}):Play()
-
+			
+				-- Initial transparency setup
+				local function setTransparency(val)
+					Input.BackgroundTransparency = val
+					Input.UIStroke.Transparency = val
+					Input.Title.TextTransparency = val
+					if descriptionbool then Input.Desc.TextTransparency = val end
+					Input.InputFrame.BackgroundTransparency = val
+					Input.InputFrame.UIStroke.Transparency = val
+					Input.InputFrame.InputBox.TextTransparency = val
+				end
+				setTransparency(1)
+			
+				-- Tween setup
+				local tweenInfo03 = TweenInfo.new(0.3, Enum.EasingStyle.Exponential)
+				local tweenInfo07 = TweenInfo.new(0.7, Enum.EasingStyle.Exponential)
+			
+				-- Fade in UI
+				TweenService:Create(Input, tweenInfo03, {BackgroundTransparency = 0.5}):Play()
+				TweenService:Create(Input.UIStroke, tweenInfo03, {Transparency = 0.5}):Play()
+				TweenService:Create(Input.Title, tweenInfo03, {TextTransparency = 0}):Play()
+				if descriptionbool then
+					TweenService:Create(Input.Desc, tweenInfo03, {TextTransparency = 0}):Play()
+				end
+				TweenService:Create(Input.InputFrame, tweenInfo03, {BackgroundTransparency = 0.9}):Play()
+				TweenService:Create(Input.InputFrame.UIStroke, tweenInfo03, {Transparency = 0.3}):Play()
+				TweenService:Create(Input.InputFrame.InputBox, tweenInfo03, {TextTransparency = 0}):Play()
+			
 				Input.InputFrame.InputBox.PlaceholderText = InputSettings.PlaceholderText
 				Input.InputFrame.Size = UDim2.new(0, Input.InputFrame.InputBox.TextBounds.X + 52, 0, 30)
-
-				Input.InputFrame.InputBox.FocusLost:Connect(function(bleh)
-
-					if InputSettings.Enter then
-						if bleh then
-							local Success, Response = pcall(function()
-								InputSettings.Callback(Input.InputFrame.InputBox.Text)
-								InputV.CurrentValue = Input.InputFrame.InputBox.Text
-							end)
-							if not Success then
-								TweenService:Create(Input, TweenInfo.new(0.7, Enum.EasingStyle.Exponential), {BackgroundTransparency = 0}):Play()
-								TweenService:Create(Input, TweenInfo.new(0.7, Enum.EasingStyle.Exponential), {BackgroundColor3 = Color3.fromRGB(85, 0, 0)}):Play()
-								TweenService:Create(Input.UIStroke, TweenInfo.new(0.7, Enum.EasingStyle.Exponential), {Transparency = 1}):Play()
-								Input.Title.Text = "Callback Error"
-								print("Luna Interface Suite | "..InputSettings.Name.." Callback Error " ..tostring(Response))
-								wait(0.5)
-								Input.Title.Text = InputSettings.Name
-								TweenService:Create(Input, TweenInfo.new(0.7, Enum.EasingStyle.Exponential), {BackgroundTransparency = 0.5}):Play()
-								TweenService:Create(Input, TweenInfo.new(0.7, Enum.EasingStyle.Exponential), {BackgroundColor3 = Color3.fromRGB(32, 30, 38)}):Play()
-								TweenService:Create(Input.UIStroke, TweenInfo.new(0.7, Enum.EasingStyle.Exponential), {Transparency = 0.5}):Play()
-							end
-						end
+			
+				local function showError(message)
+					TweenService:Create(Input, tweenInfo07, {BackgroundTransparency = 0}):Play()
+					TweenService:Create(Input, tweenInfo07, {BackgroundColor3 = Color3.fromRGB(85, 0, 0)}):Play()
+					TweenService:Create(Input.UIStroke, tweenInfo07, {Transparency = 1}):Play()
+					Input.Title.Text = "Callback Error"
+					print("Luna Interface Suite | " .. InputSettings.Name .. " Callback Error: " .. tostring(message))
+					task.delay(0.5, function()
+						Input.Title.Text = InputSettings.Name
+						TweenService:Create(Input, tweenInfo07, {BackgroundTransparency = 0.5}):Play()
+						TweenService:Create(Input, tweenInfo07, {BackgroundColor3 = Color3.fromRGB(32, 30, 38)}):Play()
+						TweenService:Create(Input.UIStroke, tweenInfo07, {Transparency = 0.5}):Play()
+					end)
+				end
+			
+				-- FocusLost event (mobile safe)
+				Input.InputFrame.InputBox.FocusLost:Connect(function(enterPressed)
+					if InputSettings.Enter and enterPressed then
+						local Success, Response = pcall(function()
+							InputSettings.Callback(Input.InputFrame.InputBox.Text)
+							InputV.CurrentValue = Input.InputFrame.InputBox.Text
+						end)
+						if not Success then showError(Response) end
 					end
-
+			
 					if InputSettings.RemoveTextAfterFocusLost then
 						Input.InputFrame.InputBox.Text = ""
 					end
-
 				end)
-
+			
+				-- Numeric filtering
 				if InputSettings.Numeric then
 					Input.InputFrame.InputBox:GetPropertyChangedSignal("Text"):Connect(function()
 						local text = Input.InputFrame.InputBox.Text
-						if not tonumber(text) and text ~= "." then
-							Input.InputFrame.InputBox.Text = text:match("[0-9.]*") or ""
-						end
+						local filtered = text:gsub("[^%d.]", ""):gsub("(%..*)%.", "%1")
+						Input.InputFrame.InputBox.Text = filtered
 					end)
 				end
-
+			
+				-- Text changed
 				Input.InputFrame.InputBox:GetPropertyChangedSignal("Text"):Connect(function()
-					if tonumber(InputSettings.MaxCharacters) then
-						if (#Input.InputFrame.InputBox.Text - 1) == InputSettings.MaxCharacters then
-							Input.InputFrame.InputBox.Text = Input.InputFrame.InputBox.Text:sub(1, InputSettings.MaxCharacters)
-						end
+					local text = Input.InputFrame.InputBox.Text
+			
+					-- Clamp max characters
+					if tonumber(InputSettings.MaxCharacters) and #text > InputSettings.MaxCharacters then
+						Input.InputFrame.InputBox.Text = text:sub(1, InputSettings.MaxCharacters)
 					end
-					TweenService:Create(Input.InputFrame, TweenInfo.new(0.55, Enum.EasingStyle.Exponential, Enum.EasingDirection.Out), {Size = UDim2.new(0, Input.InputFrame.InputBox.TextBounds.X + 52, 0, 30)}):Play()
+			
+					-- Resize box
+					TweenService:Create(Input.InputFrame, TweenInfo.new(0.55, Enum.EasingStyle.Exponential, Enum.EasingDirection.Out), {
+						Size = UDim2.new(0, Input.InputFrame.InputBox.TextBounds.X + 52, 0, 30)
+					}):Play()
+			
+					-- Call callback immediately if not Enter-based
 					if not InputSettings.Enter then
 						local Success, Response = pcall(function()
-							InputSettings.Callback(Input.InputFrame.InputBox.Text)
+							InputSettings.Callback(text)
 						end)
-						if not Success then
-							TweenService:Create(Input, TweenInfo.new(0.7, Enum.EasingStyle.Exponential), {BackgroundTransparency = 0}):Play()
-							TweenService:Create(Input, TweenInfo.new(0.7, Enum.EasingStyle.Exponential), {BackgroundColor3 = Color3.fromRGB(85, 0, 0)}):Play()
-							TweenService:Create(Input.UIStroke, TweenInfo.new(0.7, Enum.EasingStyle.Exponential), {Transparency = 1}):Play()
-							Input.Title.Text = "Callback Error"
-							print("Luna Interface Suite | "..InputSettings.Name.." Callback Error " ..tostring(Response))
-							wait(0.5)
-							Input.Title.Text = InputSettings.Name
-							TweenService:Create(Input, TweenInfo.new(0.7, Enum.EasingStyle.Exponential), {BackgroundTransparency = 0.5}):Play()
-							TweenService:Create(Input, TweenInfo.new(0.7, Enum.EasingStyle.Exponential), {BackgroundColor3 = Color3.fromRGB(32, 30, 38)}):Play()
-							TweenService:Create(Input.UIStroke, TweenInfo.new(0.7, Enum.EasingStyle.Exponential), {Transparency = 0.5}):Play()
-						end
+						if not Success then showError(Response) end
 					end
-					InputV.CurrentValue = Input.InputFrame.InputBox.Text				
+			
+					InputV.CurrentValue = text
 				end)
-
-				Input["MouseEnter"]:Connect(function()
-					tween(Input.UIStroke, {Color = Color3.fromRGB(87, 84, 104)})
+			
+				-- Touch feedback (since hover doesn't work on mobile)
+				local UserInputService = game:GetService("UserInputService")
+				Input.InputFrame.InputBox.Focused:Connect(function()
+					TweenService:Create(Input.UIStroke, tweenInfo03, {Color = Color3.fromRGB(87, 84, 104)}):Play()
 				end)
-
-				Input["MouseLeave"]:Connect(function()
-					tween(Input.UIStroke, {Color = Color3.fromRGB(64,61,76)})
+				Input.InputFrame.InputBox.FocusLost:Connect(function()
+					TweenService:Create(Input.UIStroke, tweenInfo03, {Color = Color3.fromRGB(64, 61, 76)}):Play()
 				end)
-
-
+			
+				-- InputV methods
 				function InputV:Set(NewInputSettings)
-
 					NewInputSettings = Kwargify(InputSettings, NewInputSettings or {})
-
 					InputV.Settings = NewInputSettings
 					InputSettings = NewInputSettings
-
+			
 					Input.Name = InputSettings.Name
 					Input.Title.Text = InputSettings.Name
-					if InputSettings.Description ~= nil and InputSettings.Description ~= "" and Input.Desc ~= nil then
+					if InputSettings.Description and Input.Desc then
 						Input.Desc.Text = InputSettings.Description
 					end
-
-					Input.InputFrame.InputBox:CaptureFocus()
+			
 					Input.InputFrame.InputBox.Text = tostring(InputSettings.CurrentValue)
-					Input.InputFrame.InputBox:ReleaseFocus()
 					Input.InputFrame.Size = UDim2.new(0, Input.InputFrame.InputBox.TextBounds.X + 52, 0, 42)
-
 					InputV.CurrentValue = InputSettings.CurrentValue
 				end
-
+			
 				function InputV:Destroy()
 					Input.Visible = false
 					Input:Destroy()
 				end
-
+			
 				if Flag then
 					Luna.Options[Flag] = InputV
 				end
-
-
+			
 				return InputV
-
 			end
-
+			
 			-- Dropdown
 			function Section:CreateDropdown(DropdownSettings, Flag)
 				TabPage.Position = UDim2.new(0,0,0,28)
@@ -3801,6 +3794,7 @@ function Luna:CreateWindow(WindowSettings)
 					end
 				end
 
+				-- fixed by justhey
 				Dropdown.Selected:GetPropertyChangedSignal("Text"):Connect(function()
 					local text = Dropdown.Selected.Text:lower()
 					for _, Item in ipairs(Dropdown.List:GetChildren()) do
@@ -3810,9 +3804,6 @@ function Luna:CreateWindow(WindowSettings)
 					end
 				end)
 
-				Dropdown.Selected.FocusLost:Connect(function()
-					Dropdown.Selected.Text = ""
-				end)
 
 				local function Clear()
 					for _, option in ipairs(Dropdown.List:GetChildren()) do
@@ -3824,7 +3815,7 @@ function Luna:CreateWindow(WindowSettings)
 
 				local function ActivateColorSingle(name)
 					for _, Option in pairs(Dropdown.List:GetChildren()) do
-						if Option.ClassName == "Frame" and Option.Name ~= "Template" then
+						if Option.ClassName == "TextLabel" and Option.Name ~= "Template" then
 							tween(Option, {BackgroundTransparency = 0.98})
 						end
 					end
@@ -3861,6 +3852,7 @@ function Luna:CreateWindow(WindowSettings)
 								DropdownSettings.CurrentOption = {v}
 								bleh = v
 								DropdownV.CurrentOption = bleh
+								ActivateColorSingle(v)
 							end
 
 							SafeCallback(bleh, function()
@@ -3880,7 +3872,6 @@ function Luna:CreateWindow(WindowSettings)
 								end
 								if not DropdownSettings.MultipleOptions then
 									Dropdown.Selected.PlaceholderText = DropdownSettings.CurrentOption[1] or "None"
-									ActivateColorSingle(v)
 								end
 								Dropdown.Selected.Text = ""
 							end)
@@ -3943,7 +3934,6 @@ function Luna:CreateWindow(WindowSettings)
 
 				Refresh()
 
-
 				if DropdownSettings.CurrentOption then
 					if type(DropdownSettings.CurrentOption) == "string" then
 						DropdownSettings.CurrentOption = {DropdownSettings.CurrentOption}
@@ -3953,6 +3943,20 @@ function Luna:CreateWindow(WindowSettings)
 					end
 				else
 					DropdownSettings.CurrentOption = {}
+				end
+
+				local bleh, ind = nil,0
+				for i,v in pairs(DropdownSettings.CurrentOption) do
+					ind = ind + 1
+				end
+				if ind == 1 then bleh = DropdownSettings.CurrentOption[1] else bleh = DropdownSettings.CurrentOption end
+				SafeCallback(bleh)
+				if type(bleh) == "string" then 
+					tween(Dropdown.List[bleh], {TextColor3 = Color3.fromRGB(240,240,240), BackgroundTransparency = 0.95})
+				else
+					for i,v in pairs(bleh) do
+						tween(Dropdown.List[v], {TextColor3 = Color3.fromRGB(240,240,240), BackgroundTransparency = 0.95})
+					end
 				end
 
 				if DropdownSettings.MultipleOptions then
@@ -4012,6 +4016,19 @@ function Luna:CreateWindow(WindowSettings)
 					else
 						DropdownSettings.CurrentOption = {}
 					end
+
+					local bleh, ind = nil,0
+					for i,v in pairs(DropdownSettings.CurrentOption) do
+						ind = ind + 1
+					end
+					if ind == 1 then bleh = DropdownSettings.CurrentOption[1] else bleh = DropdownSettings.CurrentOption end
+					SafeCallback(bleh)
+					for _, Option in pairs(Dropdown.List:GetChildren()) do
+						if Option.ClassName == "TextLabel" then
+							tween(Option, {TextColor3 = Color3.fromRGB(200,200,200), BackgroundTransparency = 0.98})
+						end
+					end
+					tween(Dropdown.List[bleh], {TextColor3 = Color3.fromRGB(240,240,240), BackgroundTransparency = 0.95})
 
 					if DropdownSettings.MultipleOptions then
 						if DropdownSettings.CurrentOption and type(DropdownSettings.CurrentOption) == "table" then
@@ -5314,111 +5331,71 @@ function Luna:CreateWindow(WindowSettings)
 
 		end
 
-		-- Dynamic Input
-		function Tab:CreateInput(InputSettings, Flag)
-			local InputV = { IgnoreConfig = false, Class = "Input", Settings = InputSettings }
+	-- Dynamic Input
+	function Section:CreateInput(InputSettings, Flag)
+		TabPage.Position = UDim2.new(0,0,0,28)
+		local InputV = { IgnoreConfig = false, Class = "Input", Settings = InputSettings }
 
-			InputSettings = Kwargify({
-				Name = "Dynamic Input",
-				Description = nil,
-				CurrentValue = "",
-				PlaceholderText = "Input Placeholder",
-				RemoveTextAfterFocusLost = false,
-				Numeric = false,
-				Enter = false,
-				MaxCharacters = nil,
-				Callback = function(Text)
+		InputSettings = Kwargify({
+			Name = "Dynamic Input",
+			Description = nil,
+			CurrentValue = "",
+			PlaceholderText = "Input Placeholder",
+			RemoveTextAfterFocusLost = false,
+			Numeric = false,
+			Enter = false,
+			MaxCharacters = nil,
+			Callback = function(Text)
 
-				end, -- 52
-			}, InputSettings or {})
+			end, -- 52
+		}, InputSettings or {})
 
-			InputV.CurrentValue = InputSettings.CurrentValue
+		InputV.CurrentValue = InputSettings.CurrentValue
 
-			local descriptionbool
-			if InputSettings.Description ~= nil and InputSettings.Description ~= "" then
-				descriptionbool = true
-			end
+		local descriptionbool
+		if InputSettings.Description ~= nil and InputSettings.Description ~= "" then
+			descriptionbool = true
+		end
 
-			local Input 
-			if descriptionbool then
-				Input = Elements.Template.InputDesc:Clone()
-			else
-				Input = Elements.Template.Input:Clone()
-			end
+		local Input 
+		if descriptionbool then
+			Input = Elements.Template.InputDesc:Clone()
+		else
+			Input = Elements.Template.Input:Clone()
+		end
 
-			Input.Name = InputSettings.Name
-			Input.Title.Text = InputSettings.Name
-			if descriptionbool then Input.Desc.Text = InputSettings.Description end
-			Input.Visible = true
-			Input.Parent = TabPage
+		Input.Name = InputSettings.Name
+		Input.Title.Text = InputSettings.Name
+		if descriptionbool then Input.Desc.Text = InputSettings.Description end
+		Input.Visible = true
+		Input.Parent = TabPage
 
-			Input.BackgroundTransparency = 1
-			Input.UIStroke.Transparency = 1
-			Input.Title.TextTransparency = 1
-			if descriptionbool then Input.Desc.TextTransparency = 1 end
-			Input.InputFrame.BackgroundTransparency = 1
-			Input.InputFrame.UIStroke.Transparency = 1
-			Input.InputFrame.InputBox.TextTransparency = 1
+		Input.BackgroundTransparency = 1
+		Input.UIStroke.Transparency = 1
+		Input.Title.TextTransparency = 1
+		if descriptionbool then Input.Desc.TextTransparency = 1 end
+		Input.InputFrame.BackgroundTransparency = 1
+		Input.InputFrame.UIStroke.Transparency = 1
+		Input.InputFrame.InputBox.TextTransparency = 1
 
-			TweenService:Create(Input, TweenInfo.new(0.3, Enum.EasingStyle.Exponential), {BackgroundTransparency = 0.5}):Play()
-			TweenService:Create(Input.UIStroke, TweenInfo.new(0.3, Enum.EasingStyle.Exponential), {Transparency = 0.5}):Play()
-			TweenService:Create(Input.Title, TweenInfo.new(0.3, Enum.EasingStyle.Exponential), {TextTransparency = 0}):Play()	
-			if descriptionbool then TweenService:Create(Input.Desc, TweenInfo.new(0.3, Enum.EasingStyle.Exponential), {TextTransparency = 0}):Play() end
-			TweenService:Create(Input.InputFrame, TweenInfo.new(0.3, Enum.EasingStyle.Exponential), {BackgroundTransparency = 0.9}):Play()
-			TweenService:Create(Input.InputFrame.UIStroke, TweenInfo.new(0.3, Enum.EasingStyle.Exponential), {Transparency = 0.3}):Play()
-			TweenService:Create(Input.InputFrame.InputBox, TweenInfo.new(0.3, Enum.EasingStyle.Exponential), {TextTransparency = 0}):Play()
+		TweenService:Create(Input, TweenInfo.new(0.3, Enum.EasingStyle.Exponential), {BackgroundTransparency = 0.5}):Play()
+		TweenService:Create(Input.UIStroke, TweenInfo.new(0.3, Enum.EasingStyle.Exponential), {Transparency = 0.5}):Play()
+		TweenService:Create(Input.Title, TweenInfo.new(0.3, Enum.EasingStyle.Exponential), {TextTransparency = 0}):Play()	
+		if descriptionbool then TweenService:Create(Input.Desc, TweenInfo.new(0.3, Enum.EasingStyle.Exponential), {TextTransparency = 0}):Play() end
+		TweenService:Create(Input.InputFrame, TweenInfo.new(0.3, Enum.EasingStyle.Exponential), {BackgroundTransparency = 0.9}):Play()
+		TweenService:Create(Input.InputFrame.UIStroke, TweenInfo.new(0.3, Enum.EasingStyle.Exponential), {Transparency = 0.3}):Play()
+		TweenService:Create(Input.InputFrame.InputBox, TweenInfo.new(0.3, Enum.EasingStyle.Exponential), {TextTransparency = 0}):Play()
 
-			Input.InputFrame.InputBox.PlaceholderText = InputSettings.PlaceholderText
-			Input.InputFrame.Size = UDim2.new(0, Input.InputFrame.InputBox.TextBounds.X + 52, 0, 30)
+		Input.InputFrame.InputBox.PlaceholderText = InputSettings.PlaceholderText
+		Input.InputFrame.Size = UDim2.new(0, Input.InputFrame.InputBox.TextBounds.X + 52, 0, 30)
 
-			Input.InputFrame.InputBox.FocusLost:Connect(function(bleh)
+		Input.InputFrame.InputBox.FocusLost:Connect(function(bleh)
 
-				if InputSettings.Enter then
-					if bleh then
-						local Success, Response = pcall(function()
-							InputSettings.Callback(Input.InputFrame.InputBox.Text)
-							InputV.CurrentValue = Input.InputFrame.InputBox.Text
-						end)
-						if not Success then
-							TweenService:Create(Input, TweenInfo.new(0.7, Enum.EasingStyle.Exponential), {BackgroundTransparency = 0}):Play()
-							TweenService:Create(Input, TweenInfo.new(0.7, Enum.EasingStyle.Exponential), {BackgroundColor3 = Color3.fromRGB(85, 0, 0)}):Play()
-							TweenService:Create(Input.UIStroke, TweenInfo.new(0.7, Enum.EasingStyle.Exponential), {Transparency = 1}):Play()
-							Input.Title.Text = "Callback Error"
-							print("Luna Interface Suite | "..InputSettings.Name.." Callback Error " ..tostring(Response))
-							wait(0.5)
-							Input.Title.Text = InputSettings.Name
-							TweenService:Create(Input, TweenInfo.new(0.7, Enum.EasingStyle.Exponential), {BackgroundTransparency = 0.5}):Play()
-							TweenService:Create(Input, TweenInfo.new(0.7, Enum.EasingStyle.Exponential), {BackgroundColor3 = Color3.fromRGB(32, 30, 38)}):Play()
-							TweenService:Create(Input.UIStroke, TweenInfo.new(0.7, Enum.EasingStyle.Exponential), {Transparency = 0.5}):Play()
-						end
-					end
-				end
-
-				if InputSettings.RemoveTextAfterFocusLost then
-					Input.InputFrame.InputBox.Text = ""
-				end
-
-			end)
-
-			if InputSettings.Numeric then
-				Input.InputFrame.InputBox:GetPropertyChangedSignal("Text"):Connect(function()
-					local text = Input.InputFrame.InputBox.Text
-					if not tonumber(text) and text ~= "." then
-						Input.InputFrame.InputBox.Text = text:match("[0-9.]*") or ""
-					end
-				end)
-			end
-
-			Input.InputFrame.InputBox:GetPropertyChangedSignal("Text"):Connect(function()
-				if tonumber(InputSettings.MaxCharacters) then
-					if (#Input.InputFrame.InputBox.Text - 1) == InputSettings.MaxCharacters then
-						Input.InputFrame.InputBox.Text = Input.InputFrame.InputBox.Text:sub(1, InputSettings.MaxCharacters)
-					end
-				end
-				TweenService:Create(Input.InputFrame, TweenInfo.new(0.55, Enum.EasingStyle.Exponential, Enum.EasingDirection.Out), {Size = UDim2.new(0, Input.InputFrame.InputBox.TextBounds.X + 52, 0, 30)}):Play()
-				if not InputSettings.Enter then
+			if InputSettings.Enter then
+				if bleh then
 					local Success, Response = pcall(function()
 						InputSettings.Callback(Input.InputFrame.InputBox.Text)
+						InputV.CurrentValue = Input.InputFrame.InputBox.Text
 					end)
 					if not Success then
 						TweenService:Create(Input, TweenInfo.new(0.7, Enum.EasingStyle.Exponential), {BackgroundTransparency = 0}):Play()
@@ -5433,52 +5410,93 @@ function Luna:CreateWindow(WindowSettings)
 						TweenService:Create(Input.UIStroke, TweenInfo.new(0.7, Enum.EasingStyle.Exponential), {Transparency = 0.5}):Play()
 					end
 				end
-				InputV.CurrentValue = Input.InputFrame.InputBox.Text				
-			end)
+			end
 
-			Input["MouseEnter"]:Connect(function()
-				tween(Input.UIStroke, {Color = Color3.fromRGB(87, 84, 104)})
-			end)
+			if InputSettings.RemoveTextAfterFocusLost then
+				Input.InputFrame.InputBox.Text = ""
+			end
 
-			Input["MouseLeave"]:Connect(function()
-				tween(Input.UIStroke, {Color = Color3.fromRGB(64,61,76)})
-			end)
+		end)
 
-
-			function InputV:Set(NewInputSettings)
-
-				NewInputSettings = Kwargify(InputSettings, NewInputSettings or {})
-
-				InputV.Settings = NewInputSettings
-				InputSettings = NewInputSettings
-
-				Input.Name = InputSettings.Name
-				Input.Title.Text = InputSettings.Name
-				if InputSettings.Description ~= nil and InputSettings.Description ~= "" and Input.Desc ~= nil then
-					Input.Desc.Text = InputSettings.Description
+		if InputSettings.Numeric then
+			Input.InputFrame.InputBox:GetPropertyChangedSignal("Text"):Connect(function()
+				local text = Input.InputFrame.InputBox.Text
+				if not tonumber(text) and text ~= "." then
+					Input.InputFrame.InputBox.Text = text:match("[0-9.]*") or ""
 				end
-
-				Input.InputFrame.InputBox:CaptureFocus()
-				Input.InputFrame.InputBox.Text = tostring(InputSettings.CurrentValue)
-				Input.InputFrame.InputBox:ReleaseFocus()
-				Input.InputFrame.Size = UDim2.new(0, Input.InputFrame.InputBox.TextBounds.X + 52, 0, 42)
-
-				InputV.CurrentValue = InputSettings.CurrentValue
-			end
-
-			function InputV:Destroy()
-				Input.Visible = false
-				Input:Destroy()
-			end
-
-			if Flag then
-				Luna.Options[Flag] = InputV
-			end
-
-
-			return InputV
-
+			end)
 		end
+
+		Input.InputFrame.InputBox:GetPropertyChangedSignal("Text"):Connect(function()
+			if tonumber(InputSettings.MaxCharacters) then
+				if (#Input.InputFrame.InputBox.Text - 1) == InputSettings.MaxCharacters then
+					Input.InputFrame.InputBox.Text = Input.InputFrame.InputBox.Text:sub(1, InputSettings.MaxCharacters)
+				end
+			end
+			TweenService:Create(Input.InputFrame, TweenInfo.new(0.55, Enum.EasingStyle.Exponential, Enum.EasingDirection.Out), {Size = UDim2.new(0, Input.InputFrame.InputBox.TextBounds.X + 52, 0, 30)}):Play()
+			if not InputSettings.Enter then
+				local Success, Response = pcall(function()
+					InputSettings.Callback(Input.InputFrame.InputBox.Text)
+				end)
+				if not Success then
+					TweenService:Create(Input, TweenInfo.new(0.7, Enum.EasingStyle.Exponential), {BackgroundTransparency = 0}):Play()
+					TweenService:Create(Input, TweenInfo.new(0.7, Enum.EasingStyle.Exponential), {BackgroundColor3 = Color3.fromRGB(85, 0, 0)}):Play()
+					TweenService:Create(Input.UIStroke, TweenInfo.new(0.7, Enum.EasingStyle.Exponential), {Transparency = 1}):Play()
+					Input.Title.Text = "Callback Error"
+					print("Luna Interface Suite | "..InputSettings.Name.." Callback Error " ..tostring(Response))
+					wait(0.5)
+					Input.Title.Text = InputSettings.Name
+					TweenService:Create(Input, TweenInfo.new(0.7, Enum.EasingStyle.Exponential), {BackgroundTransparency = 0.5}):Play()
+					TweenService:Create(Input, TweenInfo.new(0.7, Enum.EasingStyle.Exponential), {BackgroundColor3 = Color3.fromRGB(32, 30, 38)}):Play()
+					TweenService:Create(Input.UIStroke, TweenInfo.new(0.7, Enum.EasingStyle.Exponential), {Transparency = 0.5}):Play()
+				end
+			end
+			InputV.CurrentValue = Input.InputFrame.InputBox.Text				
+		end)
+
+		Input["MouseEnter"]:Connect(function()
+			tween(Input.UIStroke, {Color = Color3.fromRGB(87, 84, 104)})
+		end)
+
+		Input["MouseLeave"]:Connect(function()
+			tween(Input.UIStroke, {Color = Color3.fromRGB(64,61,76)})
+		end)
+
+
+		function InputV:Set(NewInputSettings)
+
+			NewInputSettings = Kwargify(InputSettings, NewInputSettings or {})
+
+			InputV.Settings = NewInputSettings
+			InputSettings = NewInputSettings
+
+			Input.Name = InputSettings.Name
+			Input.Title.Text = InputSettings.Name
+			if InputSettings.Description ~= nil and InputSettings.Description ~= "" and Input.Desc ~= nil then
+				Input.Desc.Text = InputSettings.Description
+			end
+
+			Input.InputFrame.InputBox:CaptureFocus()
+			Input.InputFrame.InputBox.Text = tostring(InputSettings.CurrentValue)
+			Input.InputFrame.InputBox:ReleaseFocus()
+			Input.InputFrame.Size = UDim2.new(0, Input.InputFrame.InputBox.TextBounds.X + 52, 0, 42)
+
+			InputV.CurrentValue = InputSettings.CurrentValue
+		end
+
+		function InputV:Destroy()
+			Input.Visible = false
+			Input:Destroy()
+		end
+
+		if Flag then
+			Luna.Options[Flag] = InputV
+		end
+
+
+		return InputV
+
+	end
 
 		-- Dropdown
 		function Tab:CreateDropdown(DropdownSettings, Flag)
@@ -5556,18 +5574,16 @@ function Luna:CreateWindow(WindowSettings)
 				end
 			end
 
+			-- fixed by justhey
 			Dropdown.Selected:GetPropertyChangedSignal("Text"):Connect(function()
-					local text = Dropdown.Selected.Text:lower()
-					for _, Item in ipairs(Dropdown.List:GetChildren()) do
-						if Item:IsA("TextLabel") and Item.Name ~= "Template" then
-							Item.Visible = text == "" or string.find(Item.Name:lower(), text, 1, true) ~= nil
-						end
+				local text = Dropdown.Selected.Text:lower()
+				for _, Item in ipairs(Dropdown.List:GetChildren()) do
+					if Item:IsA("TextLabel") and Item.Name ~= "Template" then
+						Item.Visible = text == "" or string.find(Item.Name:lower(), text, 1, true) ~= nil
 					end
+				end
 			end)
 
-			Dropdown.Selected.FocusLost:Connect(function()
-				Dropdown.Selected.Text = ""
-			end)
 
 			local function Clear()
 				for _, option in ipairs(Dropdown.List:GetChildren()) do
@@ -5579,7 +5595,7 @@ function Luna:CreateWindow(WindowSettings)
 
 			local function ActivateColorSingle(name)
 				for _, Option in pairs(Dropdown.List:GetChildren()) do
-					if Option.ClassName == "Frame" and Option.Name ~= "Template" then
+					if Option.ClassName == "TextLabel" and Option.Name ~= "Template" then
 						tween(Option, {BackgroundTransparency = 0.98})
 					end
 				end
@@ -5616,6 +5632,7 @@ function Luna:CreateWindow(WindowSettings)
 							DropdownSettings.CurrentOption = {v}
 							bleh = v
 							DropdownV.CurrentOption = bleh
+							ActivateColorSingle(v)
 						end
 
 						SafeCallback(bleh, function()
@@ -5635,7 +5652,6 @@ function Luna:CreateWindow(WindowSettings)
 							end
 							if not DropdownSettings.MultipleOptions then
 								Dropdown.Selected.PlaceholderText = DropdownSettings.CurrentOption[1] or "None"
-								ActivateColorSingle(v)
 							end
 							Dropdown.Selected.Text = ""
 						end)
@@ -5698,7 +5714,6 @@ function Luna:CreateWindow(WindowSettings)
 
 			Refresh()
 
-
 			if DropdownSettings.CurrentOption then
 				if type(DropdownSettings.CurrentOption) == "string" then
 					DropdownSettings.CurrentOption = {DropdownSettings.CurrentOption}
@@ -5708,6 +5723,20 @@ function Luna:CreateWindow(WindowSettings)
 				end
 			else
 				DropdownSettings.CurrentOption = {}
+			end
+
+			local bleh, ind = nil,0
+			for i,v in pairs(DropdownSettings.CurrentOption) do
+				ind = ind + 1
+			end
+			if ind == 1 then bleh = DropdownSettings.CurrentOption[1] else bleh = DropdownSettings.CurrentOption end
+			SafeCallback(bleh)
+			if type(bleh) == "string" then 
+				tween(Dropdown.List[bleh], {TextColor3 = Color3.fromRGB(240,240,240), BackgroundTransparency = 0.95})
+			else
+				for i,v in pairs(bleh) do
+					tween(Dropdown.List[v], {TextColor3 = Color3.fromRGB(240,240,240), BackgroundTransparency = 0.95})
+				end
 			end
 
 			if DropdownSettings.MultipleOptions then
@@ -5767,6 +5796,19 @@ function Luna:CreateWindow(WindowSettings)
 				else
 					DropdownSettings.CurrentOption = {}
 				end
+
+				local bleh, ind = nil,0
+				for i,v in pairs(DropdownSettings.CurrentOption) do
+					ind = ind + 1
+				end
+				if ind == 1 then bleh = DropdownSettings.CurrentOption[1] else bleh = DropdownSettings.CurrentOption end
+				SafeCallback(bleh)
+				for _, Option in pairs(Dropdown.List:GetChildren()) do
+					if Option.ClassName == "TextLabel" then
+						tween(Option, {TextColor3 = Color3.fromRGB(200,200,200), BackgroundTransparency = 0.98})
+					end
+				end
+				tween(Dropdown.List[bleh], {TextColor3 = Color3.fromRGB(240,240,240), BackgroundTransparency = 0.95})
 
 				if DropdownSettings.MultipleOptions then
 					if DropdownSettings.CurrentOption and type(DropdownSettings.CurrentOption) == "table" then
@@ -6646,6 +6688,29 @@ end
 
 if isStudio then
 	local Window = Luna:CreateWindow({
+		Name = "Nebula Client - Luna Hub | Blade Ball",
+		Subtitle = "by Nebula Softworks",
+		LogoID = "123795201100198",
+		LoadingEnabled = true,
+		LoadingTitle = "Nebula Client (Luna Hub)",
+		LoadingSubtitle = "Loading script for Blade Ball",
+		KeySystem = true,
+		KeySettings = {
+			Title = "Nebula Client | Key System",
+			Subtitle = "Blade Ball",
+			Note = "Please Enter Your Key To Use Nebula Client",
+			FileName = "Key", -- the name of the key file. this will be saved in ur RootFolder. However, if you don't have one, it'll save in ur config folder instead
+			SaveKey = true, -- The user's key will be saved, but if you change the key, they will be unable to use your script
+			Key = {"Example Key"}, -- List of keys that will be accepted by the system, please use a system like Pelican or Luarmor that provide key strings based on your HWID since putting a simple string is very easy to bypass
+			SecondAction = {
+				Enabled = true,
+				Type = "Link", -- Link/Discord
+				Parameter = "" -- for discord, add the invite link like home tab. for link, type the link of ur key sys
+			}
+		}
+	})
+	
+	--[[local Window = Luna:CreateWindow({
 		Name = "Luna Example Window",
 		Subtitle = "Test",
 		LogoID = "6031097225",
@@ -6830,7 +6895,7 @@ if isStudio then
 	s:CreateDropdown()
 
 	Tabs.Premium:BuildConfigSection()
-	Tabs.Premium:BuildThemeSection()
+	Tabs.Premium:BuildThemeSection()]]
 end
 
 -- THIS IS THE DEBUG DEMO, ONLY USED WHEN TESTING NEW ELEMENTS AND CODE
@@ -6878,9 +6943,4 @@ end
     t1:CreateDropdown({Callback = function(t) print(unpack(t)) end})
     t1:CreateDropdown({Description = "Special Type - Player", Callback = "", SpecialType = "Player"})
 end]]--
-
-task.delay(4, function() 
-	Luna:LoadAutoloadConfig()
-end)
-
 return Luna
